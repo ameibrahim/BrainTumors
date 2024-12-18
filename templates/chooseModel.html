@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Element</title>
+
+    <link rel="stylesheet" href="css/root.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/popup.css">
+    
+    <script src="js/GlobalCache.js?2"></script>
+    <script src="js/functions.js?2"></script>
+    <script src="js/modelChoice.js?3" defer></script>
+
+</head>
+<body>
+
+    <div class="overlay model-choice-overlay" style="display: grid;">
+        <div class="popup model-type-container">
+            <div class="popup-header">
+                <div class="close-button" onclick="
+                closePopup('.model-choice-overlay');
+                ">
+                    <img src="../assets/icons/close.png" alt="">
+                </div>
+                <h1 class="pop-up-title">
+                    <div class="prediction-title">Predictions Models</div>
+                </h1> 
+            </div>
+    
+            <div class="popup-body prediction-models-body">
+            </div>
+    
+            <div class="loader-view predict-loader" style="display:none;">
+                <div>
+                    <div class="sk-grid">
+                        <div class="sk-grid-cube"></div>
+                        <div class="sk-grid-cube"></div>
+                        <div class="sk-grid-cube"></div>
+                        <div class="sk-grid-cube"></div>
+                        <div class="sk-grid-cube"></div>
+                        <div class="sk-grid-cube"></div>
+                        <div class="sk-grid-cube"></div>
+                        <div class="sk-grid-cube"></div>
+                        <div class="sk-grid-cube"></div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="popup-footer">
+                <button disabled class="button confirm-model-changes-button" onclick="confirmModelChanges()">No Changes Made</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

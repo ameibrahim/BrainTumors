@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="meter">
+        <div class="level"></div>
+        <div class="level inactive"></div>
+        <div class="level inactive"></div>
+        <div class="level inactive"></div>
+    </div>
+
+    <style>
+        .meter {
+            width: 200px;
+            border: 1.3px solid #ff0000;
+            height: 10px;
+            background: linear-gradient(90deg,
+                    #ff9e9e 0%,
+                    /* Medium red */
+                    #ff6666 40%,
+                    /* Strong red */
+                    #ff3333 60%,
+                    /* Severe red */
+                    #ff0000 100%
+                    /* Dark severe red */
+                );
+            border-radius: 20px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            overflow: hidden;
+            counter-reset: meter-counter;
+        }
+
+        .level {
+            border-right: 1.6px solid #ff0000;
+            counter-increment: meter-counter;
+            position: relative;
+        }
+
+        .level.inactive {
+            background: white;
+        }
+
+        .level:last-child {
+            border-right: none;
+        }
+    </style>
+
+</body>
+
+</html>

@@ -1,0 +1,176 @@
+.popup {
+  position: relative;
+  box-shadow: var(--boxshadowD);
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  place-items: center;
+  box-sizing: border-box;
+  border-radius: 10px;
+  background: white;
+  min-width: 600px;
+  min-height: 500px;
+  transition: 0.4s;
+  overflow: hidden;
+  box-shadow: 0px 0px 0.5px var(--light-gray);
+}
+
+.overlay {
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  top: 0px;
+  left: 0px;
+  display: none;
+  place-items: center;
+  z-index: 10;
+
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.2);
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(9.5px);
+  -webkit-backdrop-filter: blur(9.5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.inner-overlay {
+  background: white;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  position: absolute;
+  padding: 50px;
+
+  max-height: 100%;
+  overflow: scroll;
+  display: none;
+}
+
+.back-arrow {
+  height: 50px;
+  margin-bottom: 50px;
+}
+
+.back-arrow img {
+  height: inherit;
+}
+
+.pop-up-title {
+  font-size: 1.3em;
+  color: var(--accent);
+  font-weight: 400;
+  justify-self: start;
+  padding: 0.2em 0em;
+  line-height: 1.3em;
+}
+
+.popup .close-button {
+  right: 20px;
+  top: 20px;
+}
+
+.popup-header,
+.popup-body,
+.popup-footer {
+  position: relative;
+  padding: 1em 2em;
+  margin: 0px;
+  border-bottom: 0.1px solid var(--border-fade);
+  width: 100%;
+  display: grid;
+  grid-gap: 50px;
+  box-sizing: border-box;
+  align-self: start;
+}
+
+.popup-body {
+  border-bottom: none;
+}
+
+.popup-footer {
+  border-bottom: none;
+  border-top: 0.1px solid var(--border-fade);
+  place-items: center;
+  /* padding: 1em 2em 2em 2em; */
+  align-self: end;
+}
+
+.overlay.edit-learning-objectives-overlay .popup {
+  height: 500px;
+}
+
+.overlay.edit-learning-objectives-overlay .popup .popup-body {
+  height: 100%;
+  overflow: auto;
+}
+
+.close-button,
+.circular-button {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--accent);
+  position: absolute;
+  cursor: pointer;
+  transition: 0.3s all;
+}
+.close-button {
+  align-self: center;
+  top: calc(10% + 20px);
+  z-index: 10;
+}
+
+.close-button:hover,
+.circular-button:hover {
+  transform: scale(1.13);
+}
+
+.close-button:hover img,
+.circular-button:hover img {
+  transform: scale(0.85);
+}
+
+.close-button img,
+.circular-button img {
+  height: 10px;
+  width: 10px;
+  transition: 0.3s all;
+}
+
+/* PREDICTION MODEL SELECTOR */
+
+.model-type-container .popup-body {
+  padding: 2em;
+}
+
+.model-choice-container h4 {
+  font-weight: 600;
+}
+
+.model-choice-container {
+  display: grid;
+  grid-gap: 20px;
+}
+
+.inner-model-container-list {
+  display: grid;
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.prediction-models-body {
+  max-height: 500px;
+  overflow: scroll;
+}
+
+.model-rendering-parent-container{
+  display: grid;
+  grid-gap: 10px;
+}

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/root.css">
+    <script src="js/functions.js"></script>
+</head>
+
+<body>
+
+    <style>
+        .split-view-container {
+            height: 100vh;
+            width: 100vw;
+            display: grid;
+            /* grid-template-columns: 1fr auto; */
+            position: relative;
+            /* border: 1px solid red; */
+            box-sizing: border-box;
+        }
+
+        .background-view {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            z-index: 0;
+            /* border: 1px solid blue; */
+        }
+
+        .background-view::after {
+            content: "";
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            z-index: 10 !important;
+            top: 0px;
+            left: 0px;
+            background-color: var(--accent);
+            opacity: 0.2;
+        }
+
+        .background-view img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .login-container {
+            background-color: white;
+            padding: 30px;
+            display: grid;
+            grid-gap: 20px;
+            align-items: start;
+            justify-self: end;
+            /* From https://css.glass */
+            background: rgba(255, 255, 255, 0.2);
+            border-top-right-radius: 16px;
+            border-bottom-right-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(9.5px);
+            -webkit-backdrop-filter: blur(9.5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .logo-container {
+            height: auto;
+            display: grid;
+            grid-gap: 20px;
+        }
+
+        .logo-container img {
+            height: 50px;
+        }
+
+        .input-element {
+            border: 3px solid white;
+            border-radius: 2px;
+            background: transparent;
+            border-radius: 5px;
+        }
+
+        .input-element input {
+            height: 100%;
+            width: 100%;
+            outline: none;
+            padding: 13px;
+            font-size: 16px;
+            font-weight: 600;
+            background: transparent;
+            color: white;
+
+        }
+
+        .input-element input::placeholder {
+            color: white;
+        }
+
+        .login-form {
+            display: grid;
+            grid-gap: 20px;
+            position: relative;
+            width: 100%;
+        }
+
+        button {
+            outline: none;
+            border: none;
+            padding: 1.3em 2.6em;
+            border-radius: 5px;
+            justify-self: start;
+            background: var(--accent);
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        @media screen and (max-width: 500px) {
+            .login-container {
+                width: 100vw;
+            }
+
+            .logo-container img {
+                height: 40px;
+            }
+
+            .input-element input {
+                padding: 9px;
+            }
+
+            button {
+                padding: 1em 2em;
+            }
+
+        }
+
+        .bubble-message-container {
+            color: white;
+            font-weight: 200;
+            place-self: center;
+            font-size: 1.3em;
+            opacity: 0%;
+            transition: 0.3s;
+        }
+
+        .login-heading {
+            color: white;
+        }
+
+    </style>
+
+    <div class="split-view-container">
+        <div class="background-view">
+            <img src="assets/background.png" alt="">
+        </div>
+
+        <div class="login-container">
+
+            <div class="logo-container">
+                <img src="assets/logos/air-logo.png" alt="">
+                <img src="assets/logos/rcaiot-logo.png" alt="">
+            </div>
+
+
+            <div class="login-form">
+                <h1 class="login-heading">Brain Tumor App</h1>
+                <div class="input-element">
+                    <input type="text" class="username" placeholder="username" required>
+                </div>
+                <div class="input-element">
+                    <input type="password" class="password" placeholder="password" required>
+                </div>
+                <button onclick="login()">Login</button>
+                <div class="bubble-message-container">Error</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        async function login() {
+
+            const usernameField = document.querySelector(".username");
+            const passwordField = document.querySelector(".password");
+
+            //TODO: Regex test fields
+            //TODO: Hash password
+
+            let username = usernameField.value;
+            let password = passwordField.value;
+            let params = `username=${username}&&` + `password=${password}`;
+
+            let callObject = {
+                phpFilePath: "include/login.php",
+                rejectMessage: "Login Failed",
+                params,
+                type: "post",
+            }
+
+            console.log(callObject);
+
+            try {
+
+                let result = await AJAXCall(callObject)
+                let loginResult = JSON.parse(result);
+
+                console.log(loginResult);
+                localStorage.setItem("id", loginResult.id)
+
+                if (loginResult.state != "error") {
+                    window.location.href = "./dashboard.php"
+                }
+                else {
+                    showLoginError();
+                }
+            }
+            catch (error) {
+                showLoginError();
+            }
+
+        }
+
+        function showLoginError(){
+
+            const bubbleMessageContainer = document.querySelector(".bubble-message-container");
+    
+            bubbleMessageContainer.textContent = "Wrong Credentials";
+            bubbleMessageContainer.style.opacity = "100%";
+
+            setTimeout(() => {
+                bubbleMessageContainer.style.opacity = "0%";
+            },2000);
+        }
+    </script>
+
+</body>
+
+</html>

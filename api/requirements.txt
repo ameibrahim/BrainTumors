@@ -1,0 +1,8 @@
+tensorflow
+pillow
+scikit-image
+scikit-learn
+joblib
+fastapi
+fastapi-cors
+python-multipart
