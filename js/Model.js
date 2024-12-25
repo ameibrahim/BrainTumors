@@ -69,9 +69,9 @@ class Model {
     return new Promise(async (resolve, reject) => {
       let hostname = isProjectRunningLocally()
         ? "127.0.0.1:8013"
-        : "braintumor.api.aiiot.live";
+        : "braintumorapi.aiiot.center";
       console.log("hostname: ", hostname);
-      let url = `http://${hostname}/predict?filename=test.jpg`;
+      let url = `http://${hostname}/predict`;
 
       let result = await fetch(url, {
         method: "POST",
