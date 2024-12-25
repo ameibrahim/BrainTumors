@@ -71,7 +71,7 @@ class Model {
         ? "127.0.0.1:8013"
         : "braintumorapi.aiiot.center";
       console.log("hostname: ", hostname);
-      let url = `http://${hostname}/predict`;
+      let url = `https://${hostname}/predict`;
 
       let result = await fetch(url, {
         method: "POST",
